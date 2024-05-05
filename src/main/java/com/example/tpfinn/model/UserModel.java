@@ -18,8 +18,9 @@ public class UserModel {
     private String id;
     private String fullName;
     private int age;
+    private String email;
     private String password;
-    private String address;
+    private float budget;
     private List<String> items;
 
 }
