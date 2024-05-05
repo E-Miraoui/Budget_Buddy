@@ -14,6 +14,6 @@ public class ItemModel {
     private String id;
     private String name;
     private String description;
-    private Double price;
+    private float price;
     private String categoryId;
 }
