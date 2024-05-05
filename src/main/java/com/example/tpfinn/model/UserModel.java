@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection ="UserModel" )
+@Document(collection ="user" )
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,12 +15,11 @@ import java.util.List;
 @Setter
 public class UserModel {
     @Id
-    private String username;
+    private String id;
+    private String fullName;
     private int age;
     private String password;
     private String address;
     private List<String> items;
-
-
 
 }

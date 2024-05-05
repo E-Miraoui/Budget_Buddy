@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface ItemRepository extends MongoRepository<ItemModel, String> {
-    public void deleteAllByCategoryId(String categoryId);
-    public List<ItemModel> findAllByCategoryId(String categoryId);
+    void deleteAllByCategoryId(String categoryId);
+    List<ItemModel> findAllByCategoryId(String categoryId);
 }
