@@ -50,7 +50,6 @@ public class UserController {
     @PostMapping("/user/{id}/addItem")
     public ResponseEntity<String> addItemToUser(@PathVariable String id, @RequestBody String itemId) {
         // Find the user by ID
-        System.out.println(itemId);
 
         ItemModel item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found with ID: " + itemId));

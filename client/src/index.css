@@ -1,0 +1,36 @@
+body {
+    background-color: red;
+}
+
+.all-items-container {
+    border-radius: 16px;
+    background-color: #f1f1f1;
+    width: 80%;
+    margin: 20px auto;
+    padding: 12px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.all-items-container .items-count {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 20px;
+}
+
+.all-items-container .item-card .card {
+    border: 2px solid #cecece;
+    margin: 8px 12px;
+    max-width: fit-content !important;
+}
+
+.all-items-container .item-card .card .btn{
+    font-weight: bold;
+}
+
+.all-items-container .item-card .card:hover {
+    background-color: #e1e1e1e1;
+}
