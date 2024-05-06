@@ -1,0 +1,42 @@
+
+/*hethi page css lil dashboard ily hiya profile il user ily faha items ily chrahom luser*/
+
+.container-fluid{
+    background-color: #e9edf0;
+  
+}
+.aside{
+    background-color:#2E5e4e;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+.row{
+    height: 100vh;
+    justify-content: center;
+    overflow-y: scroll;
+  }
+
+  
+ul{
+    list-style: none;
+    text-align: left;
+  }
+li{
+    margin: 5px 0;
+    display: flex;
+    flex-direction: row;
+    padding: 10px ;
+  }
+
+  
+a{
+    color: #fff;
+    text-decoration: none;
+  }
+
+  
