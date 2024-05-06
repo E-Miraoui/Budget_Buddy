@@ -44,7 +44,4 @@ We welcome contributions from the community! To contribute to Budget Buddy, plea
 5. Push your changes to your fork.
 6. Open a pull request to the main repository's `main` branch.
 
-
-
 Enjoy effortless budgeting with Budget Buddy! 💸🚀
-  
