@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; // Import useLocation hook
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
-import Item from '../itemcomponent/item';
+import Item from '../components/itemcomponent/item';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import backgroundImage from '../../assets/background.jpg'; // Import the background image
 
