@@ -9,9 +9,41 @@ import { IoIosMail } from "react-icons/io";
 const LoginRegistration =() => {
 
     const[action, setAction] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const registerLink = () => {
         setAction('active');
+    };
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await fetch('http://localhost:8080/api/v1/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            
+        if (!response.ok) {
+            const errorMessage = data.message || 'Invalid credentials';
+            alert(errorMessage);
+            return;
+        }
+        const userId = data.split('User ID: ')[1];
+        localStorage.setItem('userId', userId);
+        navigate(`/dashboard/${userId}`);
+
+            setError('');
+        } catch (error) {
+            setError(error.message || 'Invalid credentials');
+        }
     };
 
     const LoginLink = () => {
@@ -26,12 +58,18 @@ const LoginRegistration =() => {
                     <h1> Login</h1>
                     <div className="input-box">
                       <input type="text"
-                      placeholder='username' required />
+                      placeholder='email' 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required />
                     <FaUser className="icon"/> 
                     </div>
                     <div className="input-box">
                       <input type="password"
-                      placeholder='Password' required />
+                      placeholder='Password' 
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required />
                    
                    <IoLockClosedOutline className="icon"/>
                     </div>
@@ -41,7 +79,7 @@ const LoginRegistration =() => {
                         </label>
                         <a href="#">Forgot password?</a> 
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit" onClick={handleLogin}>Login</button>
                     <div className="register-link">
                         <p>Don't have an account yet ? <a href="#" onClick={registerLink} >Sign up</a></p>
                     </div>

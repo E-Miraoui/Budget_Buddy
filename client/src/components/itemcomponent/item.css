@@ -1,0 +1,17 @@
+/* css mta3 il item ily chrahom luser  */
+
+.ItemCard {
+    width: 18rem !important;
+    height: fit-content;
+    border: 1px solid #a7b5b9;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #fff;
+}
+
+.ItemCard:hover{
+    box-shadow: 2px 2px 2px #a7b5b9;
+    transition: 0.1s ease-in-out ;
+    
+}
