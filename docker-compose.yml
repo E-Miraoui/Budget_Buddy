@@ -1,23 +1,16 @@
-version: '3'
-
+version: '3.8'
 services:
   api:
     build:
-      context: .
-      dockerfile: Dockerfile.api
+      context: ./api
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
-    networks:
-      - my_network
-
+      - "127.0.0.1:8080:8080"
   client:
     build:
-      context: .
-      dockerfile: Dockerfile.client
+      context: ./client
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
-    networks:
-      - my_network
-
-networks:
-  my_network:
+      - "127.0.0.1:3000:80"
+    depends_on:
+      - api

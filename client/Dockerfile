@@ -1,29 +1,31 @@
-# Use Node.js image for building and serving React app
-FROM node:10.2.4 AS builder
+# Build stage
+FROM node:20 AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY client/package*.json ./
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Copy source files
-COPY client/ .
+# Copy the rest of the application code
+COPY . .
 
-# Build the app
+# Build the React app
 RUN npm run build
 
-# Use nginx for the final runtime image
-FROM nginx:alpine
+# Serve stage
+FROM nginx:1.25.1
 
-# Copy build files to Nginx directory
-COPY --from=builder /app/dist /usr/share/nginx/html
+# Copy the custom nginx.conf file to the container
+COPY .docker/nginx.conf /etc/nginx/nginx.conf
+
+# Copy the built React app from the build stage to the nginx container
+COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
 
-# Command to run nginx
+# Start Nginx
 CMD ["nginx", "-g", "daemon off;"]

@@ -1,22 +1,20 @@
-# Use the official Maven/Java image to create a build artifact
-FROM maven:3.9.6-openjdk-21 AS builder
-
-# Copy the Maven project and build it
-WORKDIR /app
-COPY api/ /app
-RUN mvn clean package
-
-# Use AdoptOpenJDK for the final runtime image
-FROM adoptopenjdk/openjdk-11:alpine-jre
+# Use the official Maven/Java image to create an executable JAR
+FROM maven:3.8.3-openjdk-17 AS builder
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the compiled app from the build stage
-COPY --from=builder /app/target/*.jar /app/app.jar
+# Copy the Maven project
+COPY . .
 
-# Expose the port the app runs on
-EXPOSE 8080
+# Package the application
+RUN mvn clean package
 
-# Command to run the application
-CMD ["java", "-jar", "app.jar"]
+# Use a smaller base image for the final container
+FROM openjdk:17-jdk-alpine
+
+# Copy the JAR file from the builder stage to the final image
+COPY --from=builder /app/target/tpfinn-0.0.1-SNAPSHOT.jar /app/tpfinn-0.0.1-SNAPSHOT.jar
+
+# Specify the command to run on container startup
+CMD ["java", "-jar", "/app/tpfinn-0.0.1-SNAPSHOT.jar"]
