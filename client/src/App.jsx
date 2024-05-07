@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={< LoginRegistration/>} />
         <Route path="/items/list" element={< ItemsAll/>} />
-        <Route path="/dashboard/:id" component={Dashboard} />
+        <Route path="/dashboard/:userId" element={<Dashboard />} />
 
         <Route path="*" element={<NoPage />} />
         

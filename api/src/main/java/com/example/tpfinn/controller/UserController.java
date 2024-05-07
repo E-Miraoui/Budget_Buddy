@@ -1,13 +1,9 @@
 package com.example.tpfinn.controller;
 
-import com.example.tpfinn.model.ItemCategoryModel;
 import com.example.tpfinn.model.ItemModel;
 import com.example.tpfinn.model.UserModel;
-import com.example.tpfinn.repository.ItemCategoryRepository;
 import com.example.tpfinn.repository.ItemRepository;
 import com.example.tpfinn.repository.UserRepository;
-import com.example.tpfinn.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,6 +24,22 @@ public class UserController {
 
     @Autowired
     private ItemRepository itemRepository;
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody Map<String, String> loginRequest) {
+        String email = loginRequest.get("email");
+        String password = loginRequest.get("password");
+        List<UserModel> allUsers = userRepository.findAll();
+
+        for (UserModel user : allUsers) {
+            if (user.getEmail() != null && user.getEmail().equals(email) && user.getPassword().equals(password)) {
+                LoginResponse response = new LoginResponse("Login successful", user.getId());
+                return ResponseEntity.ok(response);
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
+    }
     @PostMapping("/addUser")
     public String saveUser(@RequestBody UserModel user){
         UserModel savedItem = userRepository.insert(user);
@@ -94,6 +107,24 @@ public class UserController {
         String username = userModel.getUsername();
     return
     }*/
+
+    private static class LoginResponse {
+        private final String msg;
+        private final String userId;
+
+        public LoginResponse(String msg, String userId) {
+            this.msg = msg;
+            this.userId = userId;
+        }
+
+        public String getMsg() {
+            return msg;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+    }
 
 
     }
