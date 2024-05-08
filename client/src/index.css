@@ -32,6 +32,13 @@
     background-color: #e1e1e1e1;
 }
 
+.item-counter {
+    text-align: center;
+    font-weight: bold;
+    font-size: larger;
+    margin: 24px;
+}
+
 
 /* CSS for login and registration page */
 
